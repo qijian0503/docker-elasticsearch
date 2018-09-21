@@ -4,6 +4,7 @@
 - elasticsearch-head：5
 
 ### 目录结构
+[项目源码下载](https://github.com/qijian0503/docker-elasticsearch)
 ```
 elasticsearch/
 ├── docker-compose.yml
@@ -110,15 +111,15 @@ mv elasticsearch-head head
 - `elasticsearch\head\Gruntfile.js`修改以下片段  
 ```
 connect: {
-	server: {
-		options: {
-		    /* 默认监控：127.0.0.1,修改为：0.0.0.0 */
-			hostname: '0.0.0.0',
-			port: 9100,
-			base: '.',
-			keepalive: true
-		}
-	}
+  server: {
+    options: {
+        /* 默认监控：127.0.0.1,修改为：0.0.0.0 */
+      hostname: '0.0.0.0',
+      port: 9100,
+      base: '.',
+      keepalive: true
+    }
+  }
 }
 ```
 - `elasticsearch\head\_site\app.js`修改以下代码片段
