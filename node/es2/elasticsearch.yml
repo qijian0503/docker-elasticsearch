@@ -1,0 +1,11 @@
+network.bind_host: 0.0.0.0
+cluster.name: elasticsearch_cluster
+cluster.routing.allocation.disk.threshold_enabled: false
+node.name: node2
+node.master: false
+node.data: true
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+network.host: 0.0.0.0
+discovery.zen.minimum_master_nodes: 1
+discovery.zen.ping.unicast.hosts: es1

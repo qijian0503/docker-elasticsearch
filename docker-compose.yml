@@ -1,0 +1,41 @@
+version: '2.0'
+services:
+    elasticsearch-central:
+        image: elasticsearch:5.6.4
+        container_name: es1
+        volumes:
+           - /opt/modules/elasticsearch/node/es1/data:/usr/share/elasticsearch/data 
+           - /opt/modules/elasticsearch/node/es1/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        environment:
+           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+           - ES_CLUSTERNAME=elasticsearch
+        command: elasticsearch
+        ports:
+           - "9200:9200"
+           - "9300:9300"
+    elasticsearch-data:
+        image: elasticsearch:5.6.4
+        container_name: es2
+        volumes:
+           - /opt/modules/elasticsearch/node/es2/data:/usr/share/elasticsearch/data
+           - /opt/modules/elasticsearch/node/es2/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+        environment:
+           - bootstrap.memory_lock=true
+           - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+           - ES_CLUSTERNAME=elasticsearch
+        command: elasticsearch
+        ports:
+           - "9201:9200"
+           - "9301:9300"
+        links:
+           - elasticsearch-central:elasticsearch
+    elasticsearch-head:
+        image: mobz/elasticsearch-head:5
+        container_name: head
+        volumes:
+           - /opt/modules/elasticsearch/head/Gruntfile.js:/usr/src/app/Gruntfile.js
+           - /opt/modules/elasticsearch/head/_site/app.js:/usr/src/app/_site/app.js        
+        ports:
+           - "9100:9100"           
+        links:
+           - elasticsearch-central:elasticsearch
